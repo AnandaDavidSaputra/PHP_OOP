@@ -5,77 +5,64 @@ class Kain
     protected $merk;
     private $bahan;
 
-    public function __construct($war,$mer,$bah) {
-        $this->warna = $war;
-        $this->merk = $mer;
-        $this->bahan = $bah;
-        echo "Kain ini berwarna {$this->warna} bermerk {$this->merk} berbahan {$this->bahan} <br>";
+    function __construct($merk,$bahan) {
+        $this->merk = $merk;
+        $this->bahan = $bahan;
     }
     public function __destruct() {
         echo "Kain ini berwarna {$this->warna} bermerk {$this->merk} berbahan {$this->bahan} <br>";
     }
 
-    function set_warna($wra){
-        $this->warna = $wra;
+    function set_kain($warna){
+        $this->warna = $warna;
     }
 
-    function get_warna()
+    function get_kain()
     {
-        return $this->warna;
+        return "Kain bertekstur halus";
     }
-    function set_merk($mrk){
-        $this->merk = $mrk;
-    }
-
-    function get_merk()
-    {
-        return $this->merk;
-    }
-    function set_bahan($bhn){
-        $this->bahan = $bhn;
-    }
-
-    function get_bahan()
-    {
-        return $this->bahan;
-    }
-
-    public function tekstur(){
-        echo "Kain berbahan halus <br>";
+    
+    public function all(){
+        echo "<br> Warna : {$this->warna}<br> Merk : {$this->merk}<br> Bahan : {$this->bahan} <br>";
     }
 
 }
-    class Sarung extends Kain
-    {
-            public function tekstur(){
-                echo "Kain berbahan kasar <br>";
+
+class Sarung extends Kain
+{
+            private $asal;
+
+            function __construct($merk,$bahan){
+                parent:: __construct($merk,$bahan);
             }
-    }
+
+            function __destruct(){
+                echo "Sarung ini berwarna {$this->warna} berasal dari {$this->asal} dengan merk {$this->merk} <br>";
+            }
+
+            function set_sarung($asal, $warna){
+                $this->asal = $asal;
+                $this->warna = $warna;
+            }
+            function get_sarung(){
+                return "Sarung beraroma wangi";
+            }
+}
 
 
 
 
-    $kain = new Kain("hitam", "Oemah Etnik Official", "sutra");  
-    $sarung = new Sarung("biru", "Wadimor", "katun");
+    $kain = new Kain("Oemah Etnik Official", "Sutra");  
+    $kain->set_kain("Hitam");
+    echo "{$kain->get_kain()}";
+    $kain->all();
 
-    $kain->set_warna("Biru");
-    echo "Warna kain ini : {$kain->get_warna()} <br>";
-    $kain->set_merk("Oemah Etnik Official");
-    echo "Merk kain ini : {$kain->get_merk()} <br>";
-    $kain->set_bahan("Sutra");
-    echo "Bahan kain ini : {$kain->get_bahan()} <br>";
+    echo "<br>";
 
-    
-    $sarung->set_warna("Hitam");
-    echo "Warna kain ini : {$sarung->get_warna()} <br>";
-    $sarung->set_merk("Wadimor");
-    echo "Merk kain ini : {$sarung->get_merk()} <br>";
-    $sarung->set_bahan("Katun");
-    echo "Bahan kain ini : {$sarung->get_bahan()} <br>";
-
-    $kain->tekstur();
-    $sarung->tekstur();
-
+    $sarung = new Sarung("Wadimor", "Katun <br>");
+    $sarung->set_sarung("Boyolali", "Biru");
+    echo "{$sarung->get_sarung()}";
+    $sarung->all();
     
 ?>
 
